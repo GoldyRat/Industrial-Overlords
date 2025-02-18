@@ -1,0 +1,19 @@
+from flask import Flask, render_template
+from flask_socketio import SocketIO
+from tools import get_region_resources
+
+app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@socketio.on('region_clicked')
+def handle_region_click(data):
+    resources = get_region_resources(data['region'])
+    print(f"User clicked on {data['region']} which has resources : {resources}")
+    socketio.emit('log_message', f"User clicked on {data['region']} which has resources : {resources}")
+
+if __name__ == "__main__":
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True)

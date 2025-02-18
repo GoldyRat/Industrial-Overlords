@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom World Map</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+
+        /* Sidebar styles */
+        #sidebar {
+            position: absolute;
+            top: 0;
+            left: -300px;  /* Initially off-screen */
+            width: 300px;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+            color: white;
+            padding: 20px;
+            overflow-y: auto; /* Allow scrolling if content overflows */
+            z-index: 1000; /* Keep it above the map */
+            transition: left 0.3s ease; /* Smooth slide-in effect */
+        }
+
+        #map {
+            width: 100vw;
+            height: 100vh;
+            margin-left: 0; /* Map takes full width initially */
+            transition: margin-left 0.3s ease; /* Smooth map shift when sidebar opens */
+        }
+
+        /* Info content inside the sidebar */
+        #info {
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .country-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .country-info img {
+            width: 40px; /* Set flag size */
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            top: 20px;  /* Adjusted position */
+            right: 10px; /* Adjusted position */
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 30px;  /* Slightly larger button */
+            cursor: pointer;
+            z-index: 1100; /* Keep the button above the sidebar */
+        }
+
+        .toggle-btn:hover {
+            color: #ccc; /* Change color on hover */
+        }
+
+        #sidebar.open {
+            left: 0; /* Bring the sidebar into view when opened */
+        }
+
+        #map.shifted {
+            margin-left: 300px; /* Shift the map when the sidebar is visible */
+        }
+
+        #sidebar:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Div -->
+    <div id="sidebar">
+        <!-- Toggle Button (X to close) -->
+        <button class="toggle-btn" id="toggleSidebar">≡</button>
+
+        <h2>Information Panel</h2>
+        <div id="info">
+            <p>Click on a region to see details here.</p>
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/map.js') }}"></script>
+
+</body>
+</html>
