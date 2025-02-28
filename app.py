@@ -16,4 +16,4 @@ def handle_region_click(data):
     socketio.emit('log_message', f"User clicked on {data['region']} which has resources : {resources}")
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, debug=True)
