@@ -12,7 +12,7 @@ def index():
 @socketio.on('region_clicked')
 def handle_region_click(data):
     #resources = get_region_resources(data['region'])
-    print(f"User clicked on {data['region']}")
+    app.logger.message(f"User clicked on {data['region']}")
     socketio.emit('log_message', f"User clicked on {data['region']}")
 
 if __name__ == "__main__":
