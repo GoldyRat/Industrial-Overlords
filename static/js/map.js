@@ -99,7 +99,7 @@ function fetchCountryInfo(countryCode) {
         .catch(error => console.error('Error fetching country details:', error));
 
     // Send region info to the server
-    socket.emit('region_clicked', { countryCode });
+    
 }
 
 function onMapClick(e) {
