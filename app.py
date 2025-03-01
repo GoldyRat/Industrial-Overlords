@@ -1,12 +1,16 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+import logging
 #from tools import get_region_resources
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+app.logger.setLevel(logging.INFO)
+
 @app.route('/')
 def index():
+    app.logger.info("An user joined the server")
     return render_template('index.html')
 
 @socketio.on('region_clicked')
