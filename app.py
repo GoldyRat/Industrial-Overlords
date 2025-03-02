@@ -4,7 +4,7 @@ import logging
 #from tools import get_region_resources
 
 app = Flask(__name__)
-socketio = SocketIO(app, ping_interval=10, ping_timeout=20, cors_allowed_origins = "http://localhost:5000")
+socketio = SocketIO(app, ping_interval=10, ping_timeout=20, cors_allowed_origins = ["http://localhost:5000", "https://industrial-overlords.onrender.com"])
 
 
 app.logger.setLevel(logging.INFO)
