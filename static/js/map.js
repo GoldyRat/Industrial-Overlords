@@ -118,7 +118,7 @@ function onMapClick(e) {
             fetchCountryInfo(countryCode);
 
             // Send region info to the server
-            socket.emit('region_clicked', { lat, lng, region });
+            socket.emit('region_clicked', `User clicked on ${region}`);
         })
         .catch(error => console.error('Error fetching region data:', error));
 }

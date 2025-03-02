@@ -15,10 +15,9 @@ def index():
     return render_template('index.html')
 
 @socketio.on('region_clicked')
-def handle_region_click(data):
+def handle_region_click(message):
     #resources = get_region_resources(data['region'])
-    app.logger.info(f"User clicked on {data['region']}")
-    socketio.emit('log_message', f"User clicked on {data['region']}")
+    app.logger.info(message)
 
 if __name__ == "__main__":
     socketio.run(app, debug=True)
